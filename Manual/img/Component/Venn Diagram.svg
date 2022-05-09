@@ -1,0 +1,22 @@
+<svg width="100%" height="100%" viewBox="0 0 800 650" preserveAspectRatio="xMidYMid meet" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="0" cy="0" rx="300" ry="160" stroke="#CF0000" fill="none" stroke-width="5" transform="translate(350, 300) rotate(45)"></ellipse>
+    <ellipse cx="0" cy="0" rx="300" ry="160" stroke="#0000CF" fill="none" stroke-width="5" transform="translate(450, 300) rotate(-45)"></ellipse>
+    <ellipse cx="0" cy="0" rx="300" ry="160" stroke="black" fill="none" stroke-width="7" transform="translate(250, 400) rotate(45)" stroke-linecap="round" stroke-dasharray="1, 16"></ellipse>
+    <ellipse cx="0" cy="0" rx="300" ry="160" stroke="black" fill="none" stroke-width="6" transform="translate(550, 400) rotate(-45)" stroke-dasharray="20,10,6, 10"></ellipse>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="225" y="150" font-size="48px"><tspan>1</tspan></text>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="575" y="150" font-size="48px"><tspan>2</tspan></text>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="100" y="350" font-size="48px"><tspan>4</tspan></text>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="700" y="350" font-size="48px"><tspan>3</tspan></text>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="185" y="250" font-size="32px"><tspan>2</tspan></text>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="400" y="225" font-size="32px"><tspan>4</tspan></text>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="615" y="250" font-size="32px"><tspan>3</tspan></text>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="400" y="590" font-size="32px"><tspan>1</tspan></text>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="260" y="495" font-size="32px"><tspan>2</tspan></text>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="530" y="495" font-size="32px"><tspan>4</tspan></text>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="305" y="350" font-size="32px"><tspan>1</tspan></text>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="500" y="350" font-size="32px"><tspan>3</tspan></text>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="335" y="530" font-size="32px"><tspan>1</tspan></text>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="465" y="530" font-size="32px"><tspan>4</tspan></text>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="400" y="450" font-size="32px"><tspan>2</tspan></text>
+    <text font-family="Special Elite, sans-serif" text-anchor="middle" x="400" y="80" font-size="48px"><tspan>3</tspan></text>
+</svg>

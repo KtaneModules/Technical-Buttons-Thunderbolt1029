@@ -1,0 +1,161 @@
+fileFormatVersion: 2
+guid: 2e0fdfca93a8ad24bacab1b604ddedea
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Button B
+    100002: Button BL
+    100004: Button BR
+    100006: Button L
+    100008: Button R
+    100010: Button T
+    100012: Button TL
+    100014: Button TR
+    100016: //RootNode
+    100018: LED Base
+    100020: LED BL
+    100022: LED BR
+    100024: LED TL
+    100026: LED TR
+    400000: Button B
+    400002: Button BL
+    400004: Button BR
+    400006: Button L
+    400008: Button R
+    400010: Button T
+    400012: Button TL
+    400014: Button TR
+    400016: //RootNode
+    400018: LED Base
+    400020: LED BL
+    400022: LED BR
+    400024: LED TL
+    400026: LED TR
+    2100000: Material.001
+    2100002: Material.002
+    2100004: Material.003
+    2100006: Material.004
+    2100008: Material.005
+    2100010: Material.006
+    2100012: Material.007
+    2100014: Material.008
+    2100016: No Name
+    2300000: Button B
+    2300002: Button BL
+    2300004: Button BR
+    2300006: Button L
+    2300008: Button R
+    2300010: Button T
+    2300012: Button TL
+    2300014: Button TR
+    2300016: LED Base
+    2300018: LED BL
+    2300020: LED BR
+    2300022: LED TL
+    2300024: LED TR
+    3300000: Button B
+    3300002: Button BL
+    3300004: Button BR
+    3300006: Button L
+    3300008: Button R
+    3300010: Button T
+    3300012: Button TL
+    3300014: Button TR
+    3300016: LED Base
+    3300018: LED BL
+    3300020: LED BR
+    3300022: LED TL
+    3300024: LED TR
+    4300000: Button R
+    4300002: Button TR
+    4300004: Button T
+    4300006: Button TL
+    4300008: Button L
+    4300010: Button BL
+    4300012: Button BR
+    4300014: Button B
+    4300016: LED TR
+    4300018: LED Base
+    4300020: LED BR
+    4300022: LED TL
+    4300024: LED BL
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
