@@ -1,4 +1,5 @@
-#Technical Buttons 1.0.2
+# Technical Buttons 1.0.2
+
 It's like normal buttons but... more complicated. Wait a minute that sounds like something else. How about it's like normal buttons but... more technical. Yes I like that.
 
 Module ID: technicalButtons
