@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{454738E4-ABFE-88E4-0B20-74685E6DD95C}</ProjectGuid>
+    <ProjectGuid>{91939DB0-F606-C768-1931-2CC1DEA16541}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -267,10 +267,10 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2017.4.22f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="KMFramework">
- <HintPath>C:/Users/Zacat/OneDrive/Documents/ktane mods/complicatedButtons/Assets/Plugins/Managed/KMFramework.dll</HintPath>
+ <HintPath>C:/Users/Zacat/OneDrive/Documents/ktane mods/technicalButtons/Assets/Plugins/Managed/KMFramework.dll</HintPath>
  </Reference>
  <Reference Include="Newtonsoft.Json">
- <HintPath>C:/Users/Zacat/OneDrive/Documents/ktane mods/complicatedButtons/Assets/Plugins/Managed/Newtonsoft.Json.dll</HintPath>
+ <HintPath>C:/Users/Zacat/OneDrive/Documents/ktane mods/technicalButtons/Assets/Plugins/Managed/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
  <HintPath>C:/Users/Zacat/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.13/UnityEngine.Analytics.dll</HintPath>

@@ -152,20 +152,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 1088907534773376, guid: bc85296aa1df54242bd0140182289f4d, type: 2}
-      propertyPath: m_Name
-      value: technicalButtons
-      objectReference: {fileID: 0}
-    - target: {fileID: 114866661443855208, guid: bc85296aa1df54242bd0140182289f4d,
-        type: 2}
-      propertyPath: ModuleType
-      value: technicalButtons
-      objectReference: {fileID: 0}
-    - target: {fileID: 114866661443855208, guid: bc85296aa1df54242bd0140182289f4d,
-        type: 2}
-      propertyPath: ModuleDisplayName
-      value: Technical Buttons
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bc85296aa1df54242bd0140182289f4d, type: 2}
   m_IsPrefabParent: 0

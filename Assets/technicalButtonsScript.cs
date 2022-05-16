@@ -24,7 +24,7 @@ class button {
 		color = (color=="lightBlue") ? "light blue" : color;
 	}
 
-	public void checkShouldBePressed(Dictionary<string, int> buttonColorOccurrence, int table, bool moreOnIndicators, bool oddNoPlates, bool noVowelIndicators, bool moreParallel, bool warm) {
+	public bool checkShouldBePressed(Dictionary<string, int> buttonColorOccurrence, int table, bool moreOnIndicators, bool oddNoPlates, bool noVowelIndicators, bool moreParallel, bool warm) {
 		if (buttonColorOccurrence[color]>=2 ) {
 			twoNoDuplicates = true;
 			foreach (var kvp in buttonColorOccurrence) {
@@ -123,12 +123,14 @@ class button {
 			else if (table==3 && (twoNoDuplicates)) { shouldBePressed = true; }
 			else if (table==4 && (noVowelIndicators)) { shouldBePressed = true; }
 		}
+		else { shouldBePressed = false; }
+
+		return shouldBePressed;
 	}
 }
 class statusLight {
 	public GameObject StatusLight;
 	public int id;
-	public string color;
 
 	public statusLight(GameObject statusLightObject, int statusLightId, Material statusLightColor) {
 		StatusLight = statusLightObject;
@@ -199,19 +201,6 @@ public class technicalButtonsScript : MonoBehaviour {
 	void Awake() {
 		moduleId = moduleIdCounter++;
 
-
-		// Initialize button object array
-		List<button> keypadButtonsTemp = new List<button>();
-		for (int i = 0; i < _keypadButtons.Length; i++) {
-			keypadButtonsTemp.Add(new button(_keypadButtons[i], i, buttonColorChoices[UnityEngine.Random.Range(0, buttonColorChoices.Length)]));
-		}
-		keypadButtons = keypadButtonsTemp.ToArray();
-
-		// Add the on click function for buttons
-		foreach (button Button in keypadButtons) {
-			Button.Button.OnInteract += delegate () { keypadPress(Button); return false; };
-		}
-
 		// Initialize button status light array 
 		List<statusLight> statusLightTemp = new List<statusLight>();
 		for (int i = 0; i < _buttonStatusLights.Length; i++) {
@@ -226,10 +215,77 @@ public class technicalButtonsScript : MonoBehaviour {
 			LEDsTemp.Add(new LED(_LEDs[i], i, ledColorChoices[UnityEngine.Random.Range(0, ledColorChoices.Length)]));
 		}
 		LEDs = LEDsTemp.ToArray();
+
+		List<button> keypadButtonsTemp = new List<button>();
+		int solveableButtons;
+		do {
+			// Initialize button object array
+			keypadButtonsTemp.Clear();
+			for (int i = 0; i < _keypadButtons.Length; i++) {
+				keypadButtonsTemp.Add(new button(_keypadButtons[i], i, buttonColorChoices[UnityEngine.Random.Range(0, buttonColorChoices.Length)]));
+			}
+			keypadButtons = keypadButtonsTemp.ToArray();
+
+			setBools();
+
+			solveableButtons = 0;
+			foreach (button Button in keypadButtons) {
+				if (Button.checkShouldBePressed(buttonColorOccurrence, table, moreOnIndicators, oddNoPlates, noVowelIndicators, moreParallel, warm)) { solveableButtons++; }
+			}
+		} while (solveableButtons==0);
+
+		// Add the on click function for buttons
+		foreach (button Button in keypadButtons) {
+			Button.Button.OnInteract += delegate () { keypadPress(Button); return false; };
+		}
 	}
 
 	// Use this for initialization
 	void Start () {
+		Debug.Log("[technicalButtons #" + moduleId + "] " + "Table to be used: " + table);
+
+		foreach (button Button in keypadButtons) {
+			if (!Button.shouldBePressed) {
+				solvedButtons.Add(Button);
+			}
+			Debug.Log("[technicalButtons #" + moduleId + "] " + "Button ID: " + Button.id + ", Should be pressed: " + Button.shouldBePressed);
+		}
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
+	void Strike(button Button) {
+		GetComponent<KMBombModule>().HandleStrike();
+		statusLights[Button.id].StatusLight.GetComponent<Renderer>().material = new Material(statusLightColors[1]);
+		StartCoroutine(resetStatusLightColor(Button));
+	}
+
+	IEnumerator resetStatusLightColor(button Button) {
+		yield return new WaitForSeconds(statusLightFlashTime);
+		statusLights[Button.id].StatusLight.GetComponent<Renderer>().material = new Material(statusLightColors[0]);
+	}
+
+	void moduleSolve() {
+		GetComponent<KMBombModule>().HandlePass();
+		moduleSolved = true;
+		foreach (button Button in keypadButtons) {
+			try { Destroy(Button.Button.transform.GetChild(0).gameObject); } catch { }
+		}
+	}
+	void buttonSolve(button Button) {
+		Destroy(Button.Button.transform.GetChild(0).gameObject);
+		statusLights[Button.id].StatusLight.GetComponent<Renderer>().material = new Material(statusLightColors[2]);
+		GetComponent<KMAudio>().HandlePlayGameSoundAtTransformWithRef(KMSoundOverride.SoundEffect.ButtonPress, transform);
+		solvedButtons.Add(Button);
+		Debug.Log("[technicalButtons #" + moduleId + "] " + "Passed id: " + Button.id);
+
+		if (keypadButtons.Length==solvedButtons.ToArray().Length) { moduleSolve(); }
+	}
+
+	void setBools() {
 		// Check for one blue LED
 		foreach (LED led in LEDs) {
 			if (led.color=="blue") {
@@ -255,10 +311,11 @@ public class technicalButtonsScript : MonoBehaviour {
 		// Check for 1 or more D-type batteries
 		DBatteries = (Bomb.GetBatteryCount(Battery.D)>=1);
 
-		// Check for serial number total ios even
+		// Check for serial number total is even
 		int total = 0;
 		foreach (int num in Bomb.GetSerialNumberNumbers()) { total+=num; }
 		serialEven = (total%2==0);
+
 
 		// Check for no unlit indicators
 		moreOnIndicators = (Bomb.GetOffIndicators().Count()<Bomb.GetOnIndicators().Count());
@@ -309,68 +366,28 @@ public class technicalButtonsScript : MonoBehaviour {
 		}
 
 		// Sets the table to be used
-		if (!oneBlueLED && !oneRedLED && !DBatteries && !serialEven) { table = 3; }		// 0000
-		else if (!oneBlueLED && !oneRedLED && !DBatteries && serialEven) { table = 3; }	// 0001
-		else if (!oneBlueLED && !oneRedLED && DBatteries && !serialEven) { table = 4; }	// 0010
-		else if (!oneBlueLED && !oneRedLED && DBatteries && serialEven) { table = 1; }	// 0011
-		else if (!oneBlueLED && oneRedLED && !DBatteries && !serialEven) { table = 2; }	// 0100
-		else if (!oneBlueLED && oneRedLED && !DBatteries && serialEven) { table = 3; }	// 0101
-		else if (!oneBlueLED && oneRedLED && DBatteries && !serialEven) { table = 2; }	// 0110
-		else if (!oneBlueLED && oneRedLED && DBatteries && serialEven) { table = 1; }	// 0111
-		else if (oneBlueLED && !oneRedLED && !DBatteries && !serialEven) { table = 1; }	// 1000
-		else if (oneBlueLED && !oneRedLED && !DBatteries && serialEven) { table = 4; }	// 1001
-		else if (oneBlueLED && !oneRedLED && DBatteries && !serialEven) { table = 2; }	// 1010
-		else if (oneBlueLED && !oneRedLED && DBatteries && serialEven) { table = 4; }	// 1011
-		else if (oneBlueLED && oneRedLED && !DBatteries && !serialEven) { table = 4; }	// 1100
-		else if (oneBlueLED && oneRedLED && !DBatteries && serialEven) { table = 3; }	// 1101
-		else if (oneBlueLED && oneRedLED && DBatteries && !serialEven) { table = 1; }	// 1110
-		else if (oneBlueLED && oneRedLED && DBatteries && serialEven) { table = 2; }	// 1111
-
-		Debug.Log("Table to be used: " + table);
+		if (!oneBlueLED && !oneRedLED && !DBatteries && !serialEven) 		{ table = 3; }		// 0000
+		else if (!oneBlueLED && !oneRedLED && !DBatteries && serialEven) 	{ table = 3; }		// 0001
+		else if (!oneBlueLED && !oneRedLED && DBatteries && !serialEven) 	{ table = 4; }		// 0010
+		else if (!oneBlueLED && !oneRedLED && DBatteries && serialEven) 	{ table = 1; }		// 0011
+		else if (!oneBlueLED && oneRedLED && !DBatteries && !serialEven) 	{ table = 2; }		// 0100
+		else if (!oneBlueLED && oneRedLED && !DBatteries && serialEven) 	{ table = 3; }		// 0101
+		else if (!oneBlueLED && oneRedLED && DBatteries && !serialEven) 	{ table = 2; }		// 0110
+		else if (!oneBlueLED && oneRedLED && DBatteries && serialEven) 		{ table = 1; }		// 0111
+		else if (oneBlueLED && !oneRedLED && !DBatteries && !serialEven) 	{ table = 1; }		// 1000
+		else if (oneBlueLED && !oneRedLED && !DBatteries && serialEven) 	{ table = 4; }		// 1001
+		else if (oneBlueLED && !oneRedLED && DBatteries && !serialEven) 	{ table = 2; }		// 1010
+		else if (oneBlueLED && !oneRedLED && DBatteries && serialEven) 		{ table = 4; }		// 1011
+		else if (oneBlueLED && oneRedLED && !DBatteries && !serialEven) 	{ table = 4; }		// 1100
+		else if (oneBlueLED && oneRedLED && !DBatteries && serialEven) 		{ table = 3; }		// 1101
+		else if (oneBlueLED && oneRedLED && DBatteries && !serialEven) 		{ table = 1; }		// 1110
+		else if (oneBlueLED && oneRedLED && DBatteries && serialEven) 		{ table = 2; }		// 1111
 
 		foreach (button Button in keypadButtons) {
 			Button.checkShouldBePressed(buttonColorOccurrence, table, moreOnIndicators, oddNoPlates, noVowelIndicators, moreParallel, warm);
-			if (!Button.shouldBePressed) {
-				solvedButtons.Add(Button);
-			}
-			Debug.Log("Button ID: " + Button.id + ", Should be pressed: " + Button.shouldBePressed);
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-	void Strike(button Button) {
-		GetComponent<KMBombModule>().HandleStrike();
-		statusLights[Button.id].StatusLight.GetComponent<Renderer>().material = new Material(statusLightColors[1]);
-		StartCoroutine(resetStatusLightColor(Button));
-	}
-
-	IEnumerator resetStatusLightColor(button Button) {
-		yield return new WaitForSeconds(statusLightFlashTime);
-
-		statusLights[Button.id].StatusLight.GetComponent<Renderer>().material = new Material(statusLightColors[0]);
-	}
-
-	void moduleSolve() {
-		GetComponent<KMBombModule>().HandlePass();
-		moduleSolved = true;
-		foreach (button Button in keypadButtons) {
-			try { Destroy(Button.Button.transform.GetChild(0).gameObject); } catch { }
-		}
-	}
-	void buttonSolve(button Button) {
-		Destroy(Button.Button.transform.GetChild(0).gameObject);
-		Button.Button.GetComponentInChildren<KMHighlightable>().HighlightScale.y = 0;
-		statusLights[Button.id].StatusLight.GetComponent<Renderer>().material = new Material(statusLightColors[2]);
-		GetComponent<KMAudio>().HandlePlayGameSoundAtTransformWithRef(KMSoundOverride.SoundEffect.ButtonPress, transform);
-		solvedButtons.Add(Button);
-		Debug.Log("Passed id: " + Button.id);
-
-		if (keypadButtons.Length==solvedButtons.ToArray().Length) { moduleSolve(); }
-	}
 	bool checkForSolve(button Button){
 		bool solved = false;
 
@@ -472,9 +489,9 @@ public class technicalButtonsScript : MonoBehaviour {
 		if (moduleSolved || Button.solved) { return; }
 		Button.Button.AddInteractionPunch();
 
-		Debug.Log("Button ID: " + Button.id + ", Button colour: " + Button.color + ", Color occurrences: " + buttonColorOccurrence[Button.color]);
+		Debug.Log("[technicalButtons #" + moduleId + "] " + "Button ID: " + Button.id + ", Button colour: " + Button.color + ", Color occurrences: " + buttonColorOccurrence[Button.color]);
 
-		Button.solved = checkForSolve(Button);
+		Button.solved = Button.checkShouldBePressed(buttonColorOccurrence, table, moreOnIndicators, oddNoPlates, noVowelIndicators, moreParallel, warm);
 		if (Button.solved) { buttonSolve(Button); }
 		else { Strike(Button); }
 	}

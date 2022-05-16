@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{FE58F83B-DAB6-95A8-7379-C75DA5256FAA}</ProjectGuid>
+    <ProjectGuid>{98B5C525-FC3E-7685-9448-0F3029ACC153}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -342,10 +342,10 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2017.4.22f1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="KMFramework">
- <HintPath>C:/Users/Zacat/OneDrive/Documents/ktane mods/complicatedButtons/Assets/Plugins/Managed/KMFramework.dll</HintPath>
+ <HintPath>C:/Users/Zacat/OneDrive/Documents/ktane mods/technicalButtons/Assets/Plugins/Managed/KMFramework.dll</HintPath>
  </Reference>
  <Reference Include="Newtonsoft.Json">
- <HintPath>C:/Users/Zacat/OneDrive/Documents/ktane mods/complicatedButtons/Assets/Plugins/Managed/Newtonsoft.Json.dll</HintPath>
+ <HintPath>C:/Users/Zacat/OneDrive/Documents/ktane mods/technicalButtons/Assets/Plugins/Managed/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Users/Zacat/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -368,7 +368,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{454738E4-ABFE-88E4-0B20-74685E6DD95C}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{91939DB0-F606-C768-1931-2CC1DEA16541}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
