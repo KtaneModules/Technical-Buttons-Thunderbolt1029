@@ -198,7 +198,8 @@ public class technicalButtonsScript : MonoBehaviour {
 	int moduleId;
 	private bool moduleSolved;
 
-	void Awake() {
+	// Use this for initialization
+	void Start () {
 		moduleId = moduleIdCounter++;
 
 		// Initialize button status light array 
@@ -238,10 +239,8 @@ public class technicalButtonsScript : MonoBehaviour {
 		foreach (button Button in keypadButtons) {
 			Button.Button.OnInteract += delegate () { keypadPress(Button); return false; };
 		}
-	}
 
-	// Use this for initialization
-	void Start () {
+
 		Debug.Log("[technicalButtons #" + moduleId + "] " + "Table to be used: " + table);
 
 		foreach (button Button in keypadButtons) {
