@@ -5,6 +5,7 @@ It's like normal buttons but... more complicated. Wait a minute that sounds like
 Module ID: technicalButtons
 
 Created by: Thunderbolt1029
+
 Twitch Plays Support by: BigCrunch22
 
 GitHub: https://github.com/Thunderbolt1029/Technical-Buttons
