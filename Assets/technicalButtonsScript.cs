@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using KModkit;
+using System.Text.RegularExpressions;
 
 class button {
 	public KMSelectable Button;
@@ -250,11 +251,6 @@ public class technicalButtonsScript : MonoBehaviour {
 			Debug.Log("[technicalButtons #" + moduleId + "] " + "Button ID: " + Button.id + ", Should be pressed: " + Button.shouldBePressed);
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	void Strike(button Button) {
 		GetComponent<KMBombModule>().HandleStrike();
@@ -493,5 +489,42 @@ public class technicalButtonsScript : MonoBehaviour {
 		Button.solved = Button.checkShouldBePressed(buttonColorOccurrence, table, moreOnIndicators, oddNoPlates, noVowelIndicators, moreParallel, warm);
 		if (Button.solved) { buttonSolve(Button); }
 		else { Strike(Button); }
+	}
+	
+	//twitch plays
+    #pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"To press a button on the module, use the command !{0} press [N/NE/E/SE/S/SW/W/NW]";
+    #pragma warning restore 414
+	
+	List<string> PressedButtons = new List<string>();
+	string[] ValidButtons = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
+	
+	IEnumerator ProcessTwitchCommand(string command)
+    {
+		string[] parameters = command.Split(' ');
+		if (Regex.IsMatch(parameters[0], @"^\s*press\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
+		{
+			yield return null;
+			if (parameters.Length != 2)
+			{
+				yield return "sendtochaterror Parameter length invalid. Command ignored.";
+				yield break;
+			}
+			
+			if (!ValidButtons.Contains(parameters[1].ToUpper()))
+			{
+				yield return "sendtochaterror Button position is invalid. Command ignored.";
+				yield break;
+			}
+			
+			if (PressedButtons.Contains(parameters[1].ToUpper()))
+			{
+				yield return "sendtochaterror This button position has been pressed. Command ignored.";
+				yield break;
+			}
+			
+			_keypadButtons[Array.IndexOf(ValidButtons, parameters[1].ToUpper())].OnInteract();
+			PressedButtons.Add(parameters[1].ToUpper());
+		}
 	}
 }
