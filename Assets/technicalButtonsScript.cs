@@ -241,14 +241,19 @@ public class technicalButtonsScript : MonoBehaviour {
 			Button.Button.OnInteract += delegate () { keypadPress(Button); return false; };
 		}
 
-
-		Debug.Log("[technicalButtons #" + moduleId + "] " + "Table to be used: " + table);
+		foreach (LED led in LEDs) {
+			Debug.Log("[Technical Buttons #" + moduleId + "] " + "LED #" + led.id + " is " + led.color);
+		}
+		foreach (button Button in keypadButtons) {
+			Debug.Log("[Technical Buttons #" + moduleId + "] " + "Button #" + Button.id + " is " + Button.color);
+		}
+		Debug.Log("[Technical Buttons #" + moduleId + "] " + "Table to be used: " + table);
 
 		foreach (button Button in keypadButtons) {
 			if (!Button.shouldBePressed) {
 				solvedButtons.Add(Button);
 			}
-			Debug.Log("[technicalButtons #" + moduleId + "] " + "Button ID: " + Button.id + ", Should be pressed: " + Button.shouldBePressed);
+			Debug.Log("[Technical Buttons #" + moduleId + "] " + "Button ID: " + Button.id + ", Should be pressed: " + Button.shouldBePressed);
 		}
 	}
 
@@ -275,7 +280,7 @@ public class technicalButtonsScript : MonoBehaviour {
 		statusLights[Button.id].StatusLight.GetComponent<Renderer>().material = new Material(statusLightColors[2]);
 		GetComponent<KMAudio>().HandlePlayGameSoundAtTransformWithRef(KMSoundOverride.SoundEffect.ButtonPress, transform);
 		solvedButtons.Add(Button);
-		Debug.Log("[technicalButtons #" + moduleId + "] " + "Passed id: " + Button.id);
+		Debug.Log("[Technical Buttons #" + moduleId + "] " + "Passed id: " + Button.id);
 
 		if (keypadButtons.Length==solvedButtons.ToArray().Length) { moduleSolve(); }
 	}
@@ -484,7 +489,7 @@ public class technicalButtonsScript : MonoBehaviour {
 		if (moduleSolved || Button.solved) { return; }
 		Button.Button.AddInteractionPunch();
 
-		Debug.Log("[technicalButtons #" + moduleId + "] " + "Button ID: " + Button.id + ", Button colour: " + Button.color + ", Color occurrences: " + buttonColorOccurrence[Button.color]);
+		Debug.Log("[Technical Buttons #" + moduleId + "] " + "Button ID: " + Button.id + ", Button colour: " + Button.color + ", Color occurrences: " + buttonColorOccurrence[Button.color]);
 
 		Button.solved = Button.checkShouldBePressed(buttonColorOccurrence, table, moreOnIndicators, oddNoPlates, noVowelIndicators, moreParallel, warm);
 		if (Button.solved) { buttonSolve(Button); }

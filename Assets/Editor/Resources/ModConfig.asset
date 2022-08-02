@@ -14,10 +14,10 @@ MonoBehaviour:
   id: technicalButtons
   title: Technical Buttons
   author: 
-  description: "Technical Buttons 1.0\r.1\nIt's like normal buttons but... more complicated.
+  description: "Technical Buttons 1.1.1\nIt's like normal buttons but... more complicated.
     Wait a minute that sounds like something else. How about it's like normal buttons
     but... more technical. Yes I like that.\n\r\nModule ID: technicalButtons\r\n\r\nCreated
-    by: Thunderbolt1029\r"
+    by: Thunderbolt1029\r\n\nTwitch Plays Support: BigCrunch22"
   version: 
   outputFolder: build
   previewImage: {fileID: 2800000, guid: dcade7ed6eed99043a0da0d18c12cfe4, type: 3}
