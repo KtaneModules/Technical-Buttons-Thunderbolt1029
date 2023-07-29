@@ -227,7 +227,8 @@ public class technicalButtonsScript : MonoBehaviour {
 				keypadButtonsTemp.Add(new button(_keypadButtons[i], i, buttonColorChoices[UnityEngine.Random.Range(0, buttonColorChoices.Length)]));
 			}
 			keypadButtons = keypadButtonsTemp.ToArray();
-
+			
+			resetBools();
 			setBools();
 
 			solveableButtons = 0;
@@ -284,7 +285,19 @@ public class technicalButtonsScript : MonoBehaviour {
 
 		if (keypadButtons.Length==solvedButtons.ToArray().Length) { moduleSolve(); }
 	}
-
+	
+	void resetBools() {
+		oneBlueLED = false;
+		oneRedLED = false;
+		DBatteries = false
+		serialEven = false;
+		moreOnIndicators = false;
+		oddNoPlates = false;
+		noVowelIndicators = false
+		moreParallel = false;
+		warm = false;
+	}
+	
 	void setBools() {
 		// Check for one blue LED
 		foreach (LED led in LEDs) {
