@@ -287,13 +287,20 @@ public class technicalButtonsScript : MonoBehaviour {
 	}
 	
 	void resetBools() {
+		// Table parameters
 		oneBlueLED = false;
 		oneRedLED = false;
-		DBatteries = false
+		DBatteries = false;
 		serialEven = false;
+		table = -1;
+
+		// Button parameters
 		moreOnIndicators = false;
 		oddNoPlates = false;
-		noVowelIndicators = false
+		noVowelIndicators = false;
+		containsVowel = false;
+		numVowels = -1;
+		duplicates = false;
 		moreParallel = false;
 		warm = false;
 	}
