@@ -362,7 +362,8 @@ public class technicalButtonsScript : MonoBehaviour {
 		for (int i = 0; i < keypadButtons.Length; i++) {
 			buttonColors[i] = keypadButtons[i].color;
 		}
-
+		
+	buttonColorOccurrence = new Dictionary<string, int>();
         foreach(string color in buttonColors) {
         	if (buttonColorOccurrence.ContainsKey(color)) {
         		buttonColorOccurrence[color]++;
